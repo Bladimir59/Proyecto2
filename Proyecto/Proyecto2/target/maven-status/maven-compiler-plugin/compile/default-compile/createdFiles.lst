@@ -1,0 +1,8 @@
+clases/Paciente.class
+clases/Medico.class
+conexion/Conectar.class
+clases/Persona.class
+.netbeans_automatic_build
+main/Main.class
+clases/Administrador.class
+clases/Laboratorista.class
