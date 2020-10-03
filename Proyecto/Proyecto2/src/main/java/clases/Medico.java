@@ -1,5 +1,8 @@
 package clases;
 
+//clases importadas para fecha
+import java.sql.Date;
+
 /**
  *
  * @author Bladimir
@@ -11,11 +14,21 @@ public class Medico extends Persona{
     private String numeroColegiado;
     private String horaInicio;
     private String horaFin;
+    private Date fechaInico;
 
-    public Medico(String codigo, String nombre, String DPI, String cooreoElectronico, String telefono, String password) {
-        super(codigo, nombre, DPI, cooreoElectronico, telefono, password);
+    //este metodo funciona como fucion del padre
+    //contructor para nuevo Medico
+
+    public Medico(String numeroColegiado, String horaInicio, String horaFin, Date fechaInico, String codigo, String nombre, String DPI, String correoElectronico, String telefono, String password) {
+        super(codigo, nombre, DPI, correoElectronico, telefono, password);
+        this.numeroColegiado = numeroColegiado;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.fechaInico = fechaInico;
     }
-
+        
+    
+    
     public String getNumeroColegiado() {
         return numeroColegiado;
     }
@@ -38,6 +51,14 @@ public class Medico extends Persona{
 
     public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
+    }
+
+    public Date getFechaInico() {
+        return fechaInico;
+    }
+
+    public void setFechaInico(Date fechaInico) {
+        this.fechaInico = fechaInico;
     }
 
     

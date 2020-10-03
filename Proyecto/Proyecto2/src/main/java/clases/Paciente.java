@@ -1,5 +1,7 @@
 package clases;
 
+import java.sql.Date;
+
 /**
  *
  * @author Pladimir
@@ -7,13 +9,20 @@ package clases;
  */
 public class Paciente extends Persona{
     private String sexo;
-    private String fechaNacimiento;
+    private Date fechaNacimiento;
     private String peso;
     private String tipoSangre;
 
-    public Paciente(String codigo, String nombre, String DPI, String cooreoElectronico, String telefono, String password) {
-        super(codigo, nombre, DPI, cooreoElectronico, telefono, password);
+    public Paciente(String sexo, Date fechaNacimiento, String peso, String tipoSangre, String codigo, String nombre, String DPI, String correoElectronico, String telefono) {
+        super(codigo, nombre, DPI, correoElectronico, telefono);
+        this.sexo = sexo;
+        this.fechaNacimiento = fechaNacimiento;
+        this.peso = peso;
+        this.tipoSangre = tipoSangre;
     }
+
+    
+
 
     public String getSexo() {
         return sexo;
@@ -23,14 +32,14 @@ public class Paciente extends Persona{
         this.sexo = sexo;
     }
 
-    public String getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
+    
     public String getPeso() {
         return peso;
     }

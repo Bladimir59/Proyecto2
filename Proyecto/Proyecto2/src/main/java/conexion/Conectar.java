@@ -3,50 +3,46 @@ package conexion;
 //paquetes para la funcion de la conexion
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 /**
  *
  * @author Bladimir
  * para conectar con la base de datos
  */
 public class Conectar {
-     public static Connection conectar() throws SQLException{
-        String url="jdbc:mysql://localhost:3306/practica1";
-        return DriverManager.getConnection(url,"root","59012221");
-    }
-    public static void close(Connection cerrar){
-        try {
-            cerrar.close();
-        } catch (SQLException eX) {
-            
+    public Connection conn = null;
+    
+    //variables que son datos de la base de datos
+    private static final String driver = "com.mysql.jdbc.Driver";
+    private static final String user = "root";
+    private static final String password = "59012221";
+    private static final String url = "jdbc:mysql://localhost:3306/practica2";
+    
+    //metodo encargado de ingresar a la base de datos
+    public Conectar(){
+        conn = null;
+        try{
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, user, password);
+            if(conn != null){
+                System.out.println("Conexion establecida");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Error al conectar "+ex);
         }
     }
-    public static void close(PreparedStatement cerrar){
-        try {
-            cerrar.close();
-        } catch (SQLException eX) {
-            
+    
+    public Connection getConnection(){
+        return conn;
+    }
+    
+    //metodo encargado de slair de la base de datos
+    public void Desconectar(){
+        conn = null;
+        if(conn == null){
+            System.out.println("Conexion establecida");
         }
     }
-    public static void close(ResultSet cerrar) {
-        try {
-            cerrar.close();
-        } catch (SQLException ex) {
-        }
-        
-    }
-    public ResultSet getTabla(String consulta) throws SQLException {
-        Connection cd = conectar();
-        Statement st;
-        ResultSet datos = null;
-        try {
-            st = cd.createStatement();
-            datos = st.executeQuery(consulta);
-        } catch (Exception e) {
-        }
-        return datos;
-    }
+
+    
 }

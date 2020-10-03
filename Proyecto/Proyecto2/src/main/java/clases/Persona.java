@@ -9,17 +9,34 @@ public class Persona {
     private String codigo;
     private String nombre;
     private String DPI;
-    private String cooreoElectronico;
+    private String correoElectronico;
     private String telefono;
     private String password;
 
-    public Persona(String codigo, String nombre, String DPI, String cooreoElectronico, String telefono, String password) {
+    public Persona(String codigo, String nombre, String DPI, String correoElectronico, String telefono, String password) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.DPI = DPI;
-        this.cooreoElectronico = cooreoElectronico;
+        this.correoElectronico = correoElectronico;
         this.telefono = telefono;
         this.password = password;
+    }
+//para el ingreso de un paciente que no necesita contrase;a
+    public Persona(String codigo, String nombre, String DPI, String correoElectronico, String telefono) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.DPI = DPI;
+        this.correoElectronico = correoElectronico;
+        this.telefono = telefono;
+    }
+    
+    
+    //constructor para medicos
+    
+    public Persona(String codigo, String nombre, String cooreoElectronico) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.correoElectronico = correoElectronico;
     }
 
     public String getCodigo() {
@@ -46,12 +63,12 @@ public class Persona {
         this.DPI = DPI;
     }
 
-    public String getCooreoElectronico() {
-        return cooreoElectronico;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public void setCooreoElectronico(String cooreoElectronico) {
-        this.cooreoElectronico = cooreoElectronico;
+    public void setCorreoElectronico(String cooreoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
     public String getTelefono() {
