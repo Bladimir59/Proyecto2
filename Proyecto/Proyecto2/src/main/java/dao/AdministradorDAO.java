@@ -7,7 +7,6 @@ package dao;
 
 import clases.Administrador;
 import conexion.Conectar;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -28,18 +27,23 @@ public class AdministradorDAO {
         cn = login.getConnection();
         return cn;
     }
-    //variables que son los queris o metodos de insecercion de sql
     
-    //verificar usuario
+    //metodo que carga la coneccion
+
+     
     
     //insertar Medico
-    public void crearAdminitrador(Administrador administrador) throws SQLException, IOException{
+    public void crearAdminitrador(Administrador administrador){
         obtenerConexion();
-        PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_ADMINISTRADOR);
-        declaracionInsertar.setString(1, administrador.getCodigo());
-        declaracionInsertar.setString(2, administrador.getDPI());
-        declaracionInsertar.setString(3, administrador.getNombre());
-        declaracionInsertar.setString(4, administrador.getPasswoed());
-        declaracionInsertar.executeUpdate();
+        try{
+            PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_ADMINISTRADOR);
+            declaracionInsertar.setString(1, administrador.getCodigo());
+            declaracionInsertar.setString(2, administrador.getDPI());
+            declaracionInsertar.setString(3, administrador.getNombre());
+            declaracionInsertar.setString(4, administrador.getPasswoed());
+            declaracionInsertar.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace(System.out);
+        }
     }
 }

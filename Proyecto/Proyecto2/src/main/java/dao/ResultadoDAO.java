@@ -9,6 +9,6 @@ package dao;
  *
  * @author bladimir
  */
-public class HorarioDAO {
+public class ResultadoDAO {
     
 }

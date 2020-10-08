@@ -7,7 +7,6 @@ package dao;
 
 import clases.Examen;
 import conexion.Conectar;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -30,19 +29,20 @@ public class ExamenDAO {
     }
     //variables que son los queris o metodos de insecercion de sql
     
-    //verificar usuario
-    
-    //insertar Medico
-    public void crearExamen(Examen examen) throws SQLException, IOException{
+    public void crearExamen(Examen examen){
         obtenerConexion();
-        PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_EXAMEN);
-        declaracionInsertar.setString(1, examen.getCodigo());
-        declaracionInsertar.setString(2, examen.getNombre());
-        declaracionInsertar.setBoolean(3, examen.isOrden());
-        declaracionInsertar.setString(4, examen.getDescripcion());
-        declaracionInsertar.setDouble(5, examen.getCosto());
-        declaracionInsertar.setString(6, examen.getInforme());
-        declaracionInsertar.executeUpdate();
+        try{
+            PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_EXAMEN);
+            declaracionInsertar.setString(1, examen.getCodigo());
+            declaracionInsertar.setString(2, examen.getNombre());
+            declaracionInsertar.setBoolean(3, examen.isOrden());
+            declaracionInsertar.setString(4, examen.getDescripcion());
+            declaracionInsertar.setDouble(5, examen.getCosto());
+            declaracionInsertar.setString(6, examen.getInforme());
+            declaracionInsertar.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace(System.out);
+        }
     }
     
 }

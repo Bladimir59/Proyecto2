@@ -15,6 +15,7 @@
 </head>
 
 <body>
-    hola mundo
+    decidir a donde ir
+    <a href="CargaArchivo.jsp">ir</a>
 </body>
 </html>

@@ -1,11 +1,14 @@
 
 package clases;
 
+import java.io.Serializable;
+import org.jdom2.Element;
+
 /**
  *
  * @author bladimir
  */
-public class Examen {
+public class Examen implements Serializable{
     private String codigo;
     private String nombre;
     private boolean orden;
@@ -21,7 +24,15 @@ public class Examen {
         this.costo = costo;
         this.informe = informe;
     }
-
+    //este es un constructor para los archivos de xml
+    public Examen(Element dato) {
+        this.codigo = dato.getChildText("CODIGO");
+        this.nombre = dato.getChildText("NOMBRE");
+        this.orden = Boolean.parseBoolean(dato.getChildText("ORDEN"));
+        this.descripcion = dato.getChildText("DESCRIPCION");
+        this.costo = Double.parseDouble(dato.getChildText("COSTO"));
+        this.informe=dato.getChildText("INFORME");
+    }
     public String getCodigo() {
         return codigo;
     }

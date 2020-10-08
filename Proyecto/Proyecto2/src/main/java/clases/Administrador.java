@@ -1,5 +1,7 @@
 package clases;
 
+import org.jdom2.Element;
+
 /**
  *
  * @author Bladimir
@@ -15,6 +17,13 @@ public class Administrador {
         this.DPI = DPI;
         this.nombre = nombre;
         this.passwoed = passwoed;
+    }
+    //este es un constructor para los archivos de xml
+    public Administrador(Element dato) {
+        this.codigo = dato.getChildText("CODIGO");
+        this.DPI = dato.getChildText("DPI");
+        this.nombre = dato.getChildText("NOMBRE");
+        this.passwoed = dato.getChildText("PASSWORD");
     }
 
     public String getCodigo() {

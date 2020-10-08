@@ -1,11 +1,14 @@
 package clases;
 
+import java.io.Serializable;
+import org.jdom2.Element;
+
 /**
  *
  * @author Bladimir
  * clase generica de persona que heredara a mas clases
  */
-public class Persona {
+public class Persona implements Serializable{
     private String codigo;
     private String nombre;
     private String DPI;
@@ -29,7 +32,15 @@ public class Persona {
         this.correoElectronico = correoElectronico;
         this.telefono = telefono;
     }
-    
+    //para la carga de archivo
+    public Persona(Element persona) {
+        this.codigo = persona.getChildText("CODIGO");
+        this.nombre = persona.getChildText("NOMBRE");
+        this.DPI = persona.getChildText("DPI");
+        this.correoElectronico = persona.getChildText("CORREO");
+        this.telefono=persona.getChildText("TELEFONO");
+        this.password = persona.getChildText("PASSWORD");
+    }
     
     //constructor para medicos
     

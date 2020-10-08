@@ -9,9 +9,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Carga de Archivo</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div>
+            <h3>Carga de Datos</h3>
+        </div>
+        <div>
+            <form action="ControlS" method="post" enctype="multipart/form-data">
+                <div>
+                    <input type="file" accept=".xml" name="opcion">
+                </div>
+                <button type="submit" name="accion" value="enviar">Aceptar</button>
+            </form>                  
+        </div>
+        <%@include file="JavaScript.html"%>
     </body>
 </html>

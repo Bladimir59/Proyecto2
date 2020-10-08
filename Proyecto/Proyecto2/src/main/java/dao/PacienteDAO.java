@@ -34,18 +34,22 @@ public class PacienteDAO {
     //verificar usuario
     
     //insertar Medico
-    public void crearPaciente(Paciente paciente) throws SQLException, IOException{
+    public void crearPaciente(Paciente paciente){
         obtenerConexion();
-        PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_PACIENTE);
-        declaracionInsertar.setString(1, paciente.getCodigo());
-        declaracionInsertar.setString(2, paciente.getNombre());
-        declaracionInsertar.setString(3, paciente.getSexo());
-        declaracionInsertar.setDate(4, paciente.getFechaNacimiento());
-        declaracionInsertar.setString(5, paciente.getDPI());
-        declaracionInsertar.setString(6, paciente.getTelefono());
-        declaracionInsertar.setString(7, paciente.getPeso());
-        declaracionInsertar.setString(8, paciente.getTipoSangre());
-        declaracionInsertar.setString(9, paciente.getCorreoElectronico());
-        declaracionInsertar.executeUpdate();
+        try{
+            PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_PACIENTE);
+            declaracionInsertar.setString(1, paciente.getCodigo());
+            declaracionInsertar.setString(2, paciente.getNombre());
+            declaracionInsertar.setString(3, paciente.getSexo());
+            declaracionInsertar.setDate(4, paciente.getFechaNacimiento());
+            declaracionInsertar.setString(5, paciente.getDPI());
+            declaracionInsertar.setString(6, paciente.getTelefono());
+            declaracionInsertar.setString(7, paciente.getPeso());
+            declaracionInsertar.setString(8, paciente.getTipoSangre());
+            declaracionInsertar.setString(9, paciente.getCorreoElectronico());
+            declaracionInsertar.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace(System.out);
+        }
     }
 }

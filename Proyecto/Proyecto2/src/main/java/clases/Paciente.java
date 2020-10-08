@@ -1,6 +1,7 @@
 package clases;
 
 import java.sql.Date;
+import org.jdom2.Element;
 
 /**
  *
@@ -20,10 +21,15 @@ public class Paciente extends Persona{
         this.peso = peso;
         this.tipoSangre = tipoSangre;
     }
-
+    //este es un constructor para los archivos de xml
+    public Paciente(Element dato) {
+        super(dato);
+        this.sexo = dato.getChildText("SEXO");
+        this.fechaNacimiento = manejador.Fecha.getDate(dato.getChildText("BIRTH"));
+        this.peso = dato.getChildText("PESO");
+        this.tipoSangre = dato.getChildText("SANGRE");
+    }  
     
-
-
     public String getSexo() {
         return sexo;
     }
