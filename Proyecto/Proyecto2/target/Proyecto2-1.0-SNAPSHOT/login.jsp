@@ -5,12 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Mi primer Login</title>
-
+    <title>registo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!--JQUERY-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
@@ -33,14 +33,14 @@
                 <div class="col-12 user-img">
                     <img src="IMG/user.png" th:src="@{/user.png}"/>
                 </div>
-                <form class="col-12" th:action="@{/login}" method="get">
-                    <div class="form-group" id="user-group">
-                        <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
+                <form nome="registro" class="col-12" action="LoginControl" method="post">
+                    <div>
+                        <input type="text" name="codigo"/>
                     </div>
-                    <div class="form-group" id="contrasena-group">
-                        <input type="password" class="form-control" placeholder="Contrasena" name="password"/>
+                    <div>
+                        <input type="text" name="password"/>
                     </div>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                    <button type="submit" name="accion" value="datos"></i>  Ingresar </button>
                 </form>
                 <div class="col-12 forgot">
                     <a href="#">Recordar contrasena?</a>

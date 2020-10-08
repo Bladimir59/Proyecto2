@@ -12,25 +12,33 @@ public class Informe {
     private String codigo;
     private String medico;
     private String paciente;
+    private String tipo;
     private String informe;
     private Date fecha;
     private Time hora;
 
-    public Informe(String codigo, String medico, String paciente, String informe, Date fecha, Time hora) {
+    public Informe(String codigo, String medico, String paciente, String tipo, String informe, Date fecha, Time hora) {
         this.codigo = codigo;
         this.medico = medico;
         this.paciente = paciente;
+        this.tipo = tipo;
         this.informe = informe;
         this.fecha = fecha;
         this.hora = hora;
     }
+
+    
     //este es un constructor para los archivos de xml
-    public Administrador(Element dato) {
+    public Informe(Element dato) {
         this.codigo = dato.getChildText("CODIGO");
-        this.DPI = dato.getChildText("DPI");
-        this.nombre = dato.getChildText("NOMBRE");
-        this.passwoed = dato.getChildText("PASSWORD");
+        this.medico = dato.getChildText("MEDICO");
+        this.paciente = dato.getChildText("PACIENTE");
+        this.tipo=dato.getChildText("TIPO");
+        this.informe = dato.getChildText("INFORME");
+        this.fecha = manejador.Fecha.getDate(dato.getChildText("FECHA"));
+        this.hora = manejador.Hora.getHora(dato.getChildText("HORA"));
     }
+
     public String getCodigo() {
         return codigo;
     }
@@ -53,6 +61,14 @@ public class Informe {
 
     public void setPaciente(String paciente) {
         this.paciente = paciente;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getInforme() {
@@ -78,5 +94,5 @@ public class Informe {
     public void setHora(Time hora) {
         this.hora = hora;
     }
-    
+        
 }

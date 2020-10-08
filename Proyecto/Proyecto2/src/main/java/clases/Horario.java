@@ -27,12 +27,12 @@ public class Horario {
         this.horaSalida = horaSalida;
     }
     //este es un constructor para los archivos de xml
-    public Administrador(Element dato) {
-        this.codigo = dato.getChildText("CODIGO");
-        this.DPI = dato.getChildText("DPI");
-        this.nombre = dato.getChildText("NOMBRE");
-        this.passwoed = dato.getChildText("PASSWORD");
-    }
+//    public Administrador(Element dato) {
+//        this.codigo = dato.getChildText("CODIGO");
+//        this.DPI = dato.getChildText("DPI");
+//        this.nombre = dato.getChildText("NOMBRE");
+//        this.passwoed = dato.getChildText("PASSWORD");
+//    }
     
     public Horario(String codigLab, String dia) {
         this.codigLab = codigLab;

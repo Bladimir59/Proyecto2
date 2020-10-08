@@ -12,6 +12,16 @@
         <title>Medico</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Administrador</h1>
+        que desea realizar hoy
+        <br/>
+        <a href="NewAdministrador.jsp">crear nuevo administrador</a>
+        <br/>
+        <a href="NewDoctor.jsp">Crear nuevo Medico</a>
+        <br/>
+        <a href="NewLaboratorista.jsp">Crear nuevo Laboratorista</a>
+        <br/>
+        <a href=".jsp"></a>
+        <br/>
     </body>
 </html>

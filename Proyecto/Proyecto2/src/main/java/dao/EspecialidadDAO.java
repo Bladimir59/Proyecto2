@@ -25,7 +25,7 @@ public class EspecialidadDAO {
     }
     
     //insertar Medico
-    public void crearEspecialidad(Especialidad especialidad) throws SQLException, IOException{
+    public void crearEspecialidad(Especialidad especialidad){
         obtenerConexion();
         try{
             PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_ESPECIALIDAD);

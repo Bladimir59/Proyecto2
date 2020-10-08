@@ -45,6 +45,8 @@ public class ControlS extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ControlS at " + request.getContextPath() + "</h1>");
+            out.println("carga de archivo exitoso");
+            out.println("<a href=\"login.jsp\">ACEPTAR</a>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,7 +76,6 @@ public class ControlS extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     
-    
     //manda a la clase que maneja la divicion del archivo
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -96,6 +97,7 @@ public class ControlS extends HttpServlet {
             CargaArchivo leer = new CargaArchivo(direccion);
             leer.archivo();
             System.out.println("envio");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
 
         } catch (IOException | ServletException ex) {
             ex.printStackTrace(System.out);

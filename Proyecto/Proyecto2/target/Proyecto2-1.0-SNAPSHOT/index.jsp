@@ -15,7 +15,16 @@
 </head>
 
 <body>
-    decidir a donde ir
-    <a href="CargaArchivo.jsp">ir</a>
+    <%
+        if(manejador.Verificar.siExiste()){
+            %>
+            <%@include file="login.jsp" %>
+            <%
+        }else{
+            %>
+            <%@include file="CargaArchivo.jsp" %>
+            <%
+        }
+    %>
 </body>
 </html>

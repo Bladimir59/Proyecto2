@@ -2,20 +2,26 @@ package manejador;
 
 import clases.Administrador;
 import clases.Cita;
+import clases.Especialidad;
 import clases.Examen;
+import clases.Informe;
 import clases.Laboratorista;
 import clases.Medico;
 import clases.Paciente;
+import clases.Resultado;
+import clases.Union;
 import dao.AdministradorDAO;
 import dao.CitaDAO;
+import dao.EspecialidadDAO;
 import dao.ExamenDAO;
+import dao.InformeDAO;
 import dao.LaboratoristaDAO;
 import dao.MedicoDAO;
 import dao.PacienteDAO;
-import java.io.File;
+import dao.ResultadoDAO;
+import dao.UnionDAO;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.Part;
@@ -40,7 +46,12 @@ public class CargaArchivo {
         examen();
         laboratorista();
         paciente();
+        especialidad();
         medico();
+        cita();
+        informe();
+        resultado();
+        Union();
     }
     private List<Element> getDatos(String eleccion) {
         List<Element> elementos = new ArrayList<>();
@@ -72,24 +83,33 @@ public class CargaArchivo {
         }
     }
     public void cita(){
-//        List<Cita> listaCita = new ArrayList<>();
-//        List<Element> lista = getDatos("cita");
-//        for (int i=0; i<lista.size();i++) {
-//            listaCita.add(new Cita(lista.get(i)));
-//            System.out.println(lista.toString());
-//        }
-//
-//        CitaDAO dao = new CitaDAO();
-//        for (Cita info : listaCita) {
-//            dao.crearCita(info);
-//            System.out.println(info.toString());
-//        }
-    }
-    public void consulta(){
-        
+        List<Cita> listaCita = new ArrayList<>();
+        List<Element> lista = getDatos("cita");
+        for (int i=0; i<lista.size();i++) {
+            listaCita.add(new Cita(lista.get(i)));
+            System.out.println(lista.toString());
+        }
+
+        CitaDAO dao = new CitaDAO();
+        for (Cita info : listaCita) {
+            dao.crearCita(info);
+            System.out.println(info.toString());
+        }
     }
     public void especialidad(){
-        
+        List<Especialidad> listaEspecialidades= new ArrayList<>();
+        List<Element> lista = getDatos("consulta");
+        for (int i=0; i<lista.size();i++) {
+            
+            listaEspecialidades.add(new Especialidad(lista.get(i)));
+            System.out.println(lista.toString());
+        }
+
+        EspecialidadDAO dao = new EspecialidadDAO();
+        for (Especialidad info : listaEspecialidades) {
+            dao.crearEspecialidad(info);
+            System.out.println(info.toString());
+        }
     }
     public void examen(){
         List<Examen> listaExamen= new ArrayList<>();
@@ -107,7 +127,19 @@ public class CargaArchivo {
         }
     }
     public void informe(){
-        
+        List<Informe> listaInforme= new ArrayList<>();
+        List<Element> lista = getDatos("reporte");
+        for (int i=0; i<lista.size();i++) {
+            
+            listaInforme.add(new Informe(lista.get(i)));
+            System.out.println(lista.toString());
+        }
+
+        InformeDAO dao = new InformeDAO();
+        for (Informe info : listaInforme) {
+            dao.crearInforme(info);
+            System.out.println(info.toString());
+        }
     }
     public void laboratorista(){
         List<Laboratorista> listaLaboratorista= new ArrayList<>();
@@ -155,6 +187,33 @@ public class CargaArchivo {
         }
     }
     public void resultado(){
-        
+        List<Resultado> listaResultado= new ArrayList<>();
+        List<Element> lista = getDatos("resultado");
+        for (int i=0; i<lista.size();i++) {
+            
+            listaResultado.add(new Resultado(lista.get(i)));
+            System.out.println(lista.toString());
+        }
+
+        ResultadoDAO dao = new ResultadoDAO();
+        for (Resultado info : listaResultado) {
+            dao.crearResultado(info);
+            System.out.println(info.toString());
+        }
+    }
+    public void Union(){
+        List<Union> listaEspecialidad= new ArrayList<>();
+        List<Element> lista = getDatos("doctor");
+        for (int i=0; i<lista.size();i++) {
+            
+            listaEspecialidad.add(new Union(lista.get(i)));
+            System.out.println(lista.toString());
+        }
+
+        UnionDAO dao = new UnionDAO();
+        for (Union info : listaEspecialidad) {
+            dao.llenarUnion(info);
+            System.out.println(info.toString());
+        }
     }
 }

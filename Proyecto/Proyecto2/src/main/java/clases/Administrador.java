@@ -26,6 +26,11 @@ public class Administrador {
         this.passwoed = dato.getChildText("PASSWORD");
     }
 
+    @Override
+    public String toString() {
+        return "Administrador{" + "codigo=" + codigo + ", DPI=" + DPI + ", nombre=" + nombre + ", passwoed=" + passwoed + '}';
+    }
+    
     public String getCodigo() {
         return codigo;
     }

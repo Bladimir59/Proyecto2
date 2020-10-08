@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form name="formulario1" action="/recursosEnServidor">
+        <form name="formulario1" action="">
         <fieldset>
             <legend>
                 <h1>DOCTOR:</h1>

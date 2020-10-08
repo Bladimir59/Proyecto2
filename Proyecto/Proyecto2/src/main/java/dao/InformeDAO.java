@@ -14,10 +14,11 @@ import java.sql.SQLException;
 public class InformeDAO {
     private static Connection cn;
     private static conexion.Conectar login;
-    private static final String NUEVO_INFORME= "INSERT INTO Informe (codigoInforme, Medico_codigoMedico,"
-            + " Paciente_codigoPaciente, informe, fechaInforme, hora) "
-            + "VALUES(?, ?, ?, ?, ?, ?)";
-    
+    private static final String NUEVO_INFORME= "INSERT INTO Informe ( codigoInforme, Medico_codigoMedico,"
+            + " Paciente_codigoPaciente, informe, fechaInforme, hora, Especialidad_idEspecialidad)"
+            + "VALUES(?, ?, ?, ?, ?, ?, (SELECT idEspecialidad FROM Especialidad WHERE nombreEspecialidad=? LIMIT 1))";
+    //INSERT INTO Informe(codigoInforme , Medico_codigoMedico , Paciente_codigoPaciente , informe ,fechaInforme,hora,Especialidad_idEspecialidad) 
+    //VALUES('469607','MED-852','177840','Sed tellus magna, fermentum ut nisl ut, cursus sagittis justo. In dapibus porttitor ex, eu porttitor nisi rhoncus non. In mattis risus lacus, id aliquet lectus egestas tincidunt. Aenean arcu risus, ultricies non vestibulum vel, ultricies sit amet lorem. Quisque laoreet, dolor at mollis elementum, ex libero sagittis mi, at viverra ipsum odio ut sapien. Donec posuere dui at nisl euismod, volutpat placerat lectus tincidunt. Vestibulum eleifend quam laoreet velit mattis sagittis.','2020-01-10','16:00','4');
     //conexion para la base de datos
     public static Connection obtenerConexion(){
         login= new Conectar();
@@ -29,7 +30,7 @@ public class InformeDAO {
     //verificar usuario
     
     //insertar Medico
-    public void crearAdminitrador(Informe informe){
+    public void crearInforme(Informe informe){
         obtenerConexion();
         try{
             PreparedStatement declaracionInsertar = cn.prepareStatement(NUEVO_INFORME);
@@ -39,6 +40,7 @@ public class InformeDAO {
             declaracionInsertar.setString(4, informe.getInforme());
             declaracionInsertar.setDate(5, informe.getFecha());
             declaracionInsertar.setTime(6, informe.getHora());
+            declaracionInsertar.setString(7, informe.getTipo());
             declaracionInsertar.executeUpdate();  
         }catch(SQLException e){
             e.printStackTrace(System.out);

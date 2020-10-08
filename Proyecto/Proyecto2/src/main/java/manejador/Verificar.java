@@ -28,7 +28,7 @@ public class Verificar {
         cn = login.getConnection();
         return cn;
     }
-     public boolean siExiste()throws SQLException, IOException{
+     public static boolean siExiste()throws SQLException, IOException{
         boolean hay=false;
         obtenerConexion();
         PreparedStatement obtener=null;

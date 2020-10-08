@@ -1,0 +1,225 @@
+CREATE SCHEMA IF NOT EXISTS `practica2` DEFAULT CHARACTER SET utf8 ;
+USE `practica2` ;
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Medico` (
+  `codigoMedico` VARCHAR(50) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `numeroColegiado` VARCHAR(45) NOT NULL,
+  `DPI` VARCHAR(45) NOT NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `correoElectronico` VARCHAR(45) NOT NULL,
+  `fechaInicioTrabajo` DATE NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`codigoMedico`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Especialidad` (
+  `idEspecialidad` INT NOT NULL AUTO_INCREMENT,
+  `nombreEspecialidad` VARCHAR(45) NOT NULL,
+  `Descripcion` VARCHAR(45) NULL,
+  `costo` DOUBLE NOT NULL,
+  PRIMARY KEY (`idEspecialidad`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Horario` (
+  `idHorario` INT NOT NULL AUTO_INCREMENT,
+  `Dia` VARCHAR(45) NOT NULL,
+  `horaEntrada` TIME NOT NULL,
+  `horaSalida` TIME NOT NULL,
+  `Medico_codigoMedico` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`idHorario`),
+  INDEX `fk_Horario_Medico1_idx` (`Medico_codigoMedico` ASC) VISIBLE,
+  CONSTRAINT `fk_Horario_Medico1`
+    FOREIGN KEY (`Medico_codigoMedico`)
+    REFERENCES `practica2`.`Medico` (`codigoMedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Examen` (
+  `codigo` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(150) NOT NULL,
+  `orden` TINYINT(1) NOT NULL,
+  `descripcion` VARCHAR(255) NOT NULL,
+  `costo` DOUBLE NOT NULL,
+  `informe` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`codigo`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Laboratorista` (
+  `codigoLaboratorista` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `numeroRegistro` VARCHAR(20) NOT NULL,
+  `DPI` VARCHAR(45) NOT NULL,
+  `telefono` VARCHAR(45) NOT NULL,
+  `correoElectronico` VARCHAR(255) NOT NULL,
+  `fechaInicioTrabajo` DATE NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `Examen_codigo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`codigoLaboratorista`),
+  INDEX `fk_Laboratorista_Examen1_idx` (`Examen_codigo` ASC) VISIBLE,
+  CONSTRAINT `fk_Laboratorista_Examen1`
+    FOREIGN KEY (`Examen_codigo`)
+    REFERENCES `practica2`.`Examen` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Paciente` (
+  `codigoPaciente` VARCHAR(25) NOT NULL,
+  `nombre` VARCHAR(255) NOT NULL,
+  `sexo` VARCHAR(20) NOT NULL,
+  `fechaNacimiento` DATE NULL,
+  `DPI` VARCHAR(20) NULL,
+  `telefono` VARCHAR(20) NULL,
+  `peso` VARCHAR(20) NULL,
+  `tipoSangre` VARCHAR(20) NULL,
+  `correoElectronico` VARCHAR(150) NULL,
+  PRIMARY KEY (`codigoPaciente`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Informe` (
+  `codigoInforme` INT NOT NULL,
+  `Medico_codigoMedico` VARCHAR(50) NOT NULL,
+  `Paciente_codigoPaciente` VARCHAR(25) NOT NULL,
+  `informe` MEDIUMTEXT NULL,
+  `fechaInforme` DATE NULL,
+  `hora` TIME NOT NULL,
+  `Especialidad_idEspecialidad` INT NOT NULL,
+  PRIMARY KEY (`codigoInforme`),
+  INDEX `fk_Informe_Medico1_idx` (`Medico_codigoMedico` ASC) VISIBLE,
+  INDEX `fk_Informe_Paciente1_idx` (`Paciente_codigoPaciente` ASC) VISIBLE,
+  INDEX `fk_Informe_Especialidad1_idx` (`Especialidad_idEspecialidad` ASC) VISIBLE,
+  CONSTRAINT `fk_Informe_Medico1`
+    FOREIGN KEY (`Medico_codigoMedico`)
+    REFERENCES `practica2`.`Medico` (`codigoMedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Informe_Paciente1`
+    FOREIGN KEY (`Paciente_codigoPaciente`)
+    REFERENCES `practica2`.`Paciente` (`codigoPaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Informe_Especialidad1`
+    FOREIGN KEY (`Especialidad_idEspecialidad`)
+    REFERENCES `practica2`.`Especialidad` (`idEspecialidad`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Resultado` (
+  `codigo` INT NOT NULL,
+  `informe` VARCHAR(225) NULL,
+  `Paciente_codigoPaciente` VARCHAR(25) NOT NULL,
+  `Laboratorista_codigoLaboratorista` VARCHAR(45) NOT NULL,
+  `examenRealizado` LONGBLOB NOT NULL,
+  `hora` TIME NULL,
+  `fecha` DATE NULL,
+  `Examen_codigo` VARCHAR(45) NOT NULL,
+  `Medico_codigoMedico` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`codigo`, `Examen_codigo`),
+  INDEX `fk_Resultado_Paciente1_idx` (`Paciente_codigoPaciente` ASC) VISIBLE,
+  INDEX `fk_Resultado_Laboratorista1_idx` (`Laboratorista_codigoLaboratorista` ASC) VISIBLE,
+  INDEX `fk_Resultado_Examen1_idx` (`Examen_codigo` ASC) VISIBLE,
+  INDEX `fk_Resultado_Medico1_idx` (`Medico_codigoMedico` ASC) VISIBLE,
+  CONSTRAINT `fk_Resultado_Paciente1`
+    FOREIGN KEY (`Paciente_codigoPaciente`)
+    REFERENCES `practica2`.`Paciente` (`codigoPaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Resultado_Laboratorista1`
+    FOREIGN KEY (`Laboratorista_codigoLaboratorista`)
+    REFERENCES `practica2`.`Laboratorista` (`codigoLaboratorista`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Resultado_Examen1`
+    FOREIGN KEY (`Examen_codigo`)
+    REFERENCES `practica2`.`Examen` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Resultado_Medico1`
+    FOREIGN KEY (`Medico_codigoMedico`)
+    REFERENCES `practica2`.`Medico` (`codigoMedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Administrador` (
+  `idAdministrador` VARCHAR(45) NOT NULL,
+  `DPI` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idAdministrador`))
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`MedicoEspecialidad` (
+  `idMedicoEspecialidad` INT NOT NULL AUTO_INCREMENT,
+  `Medico_codigoMedico` VARCHAR(50) NULL,
+  `Especialidad_idEspecialidad` INT NULL,
+  PRIMARY KEY (`idMedicoEspecialidad`),
+  INDEX `fk_Medico_has_Especialidad_Especialidad1_idx` (`Especialidad_idEspecialidad` ASC) VISIBLE,
+  INDEX `fk_Medico_has_Especialidad_Medico1_idx` (`Medico_codigoMedico` ASC) VISIBLE,
+  CONSTRAINT `fk_Medico_has_Especialidad_Medico1`
+    FOREIGN KEY (`Medico_codigoMedico`)
+    REFERENCES `practica2`.`Medico` (`codigoMedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Medico_has_Especialidad_Especialidad1`
+    FOREIGN KEY (`Especialidad_idEspecialidad`)
+    REFERENCES `practica2`.`Especialidad` (`idEspecialidad`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`HorarioLab` (
+  `idHorarioLab` INT NOT NULL AUTO_INCREMENT,
+  `dia` VARCHAR(45) NOT NULL,
+  `Laboratorista_codigoLaboratorista` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idHorarioLab`),
+  INDEX `fk_HorarioLab_Laboratorista1_idx` (`Laboratorista_codigoLaboratorista` ASC) VISIBLE,
+  CONSTRAINT `fk_HorarioLab_Laboratorista1`
+    FOREIGN KEY (`Laboratorista_codigoLaboratorista`)
+    REFERENCES `practica2`.`Laboratorista` (`codigoLaboratorista`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `practica2`.`Cita` (
+  `idCita` VARCHAR(100) NOT NULL,
+  `fecha` DATE NOT NULL,
+  `hora` TIME NOT NULL,
+  `Paciente_codigoPaciente` VARCHAR(25) NOT NULL,
+  `Medico_codigoMedico` VARCHAR(50) NOT NULL,
+  `Especialidad_idEspecialidad` INT NOT NULL,
+  PRIMARY KEY (`idCita`),
+  INDEX `fk_Cita_Paciente1_idx` (`Paciente_codigoPaciente` ASC) VISIBLE,
+  INDEX `fk_Cita_Medico1_idx` (`Medico_codigoMedico` ASC) VISIBLE,
+  INDEX `fk_Cita_Especialidad1_idx` (`Especialidad_idEspecialidad` ASC) VISIBLE,
+  CONSTRAINT `fk_Cita_Paciente1`
+    FOREIGN KEY (`Paciente_codigoPaciente`)
+    REFERENCES `practica2`.`Paciente` (`codigoPaciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Cita_Medico1`
+    FOREIGN KEY (`Medico_codigoMedico`)
+    REFERENCES `practica2`.`Medico` (`codigoMedico`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Cita_Especialidad1`
+    FOREIGN KEY (`Especialidad_idEspecialidad`)
+    REFERENCES `practica2`.`Especialidad` (`idEspecialidad`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+

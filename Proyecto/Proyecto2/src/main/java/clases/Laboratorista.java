@@ -25,7 +25,7 @@ public class Laboratorista extends Persona implements Serializable{
         super(dato);
         this.numeroRegistro = dato.getChildText("REGISTRO");
         this.examen = dato.getChildText("EXAMEN");
-        this.fechaInico=manejador.Fecha.getDate(dato.getChildText(null));
+        this.fechaInico=manejador.Fecha.getDate(dato.getChildText("FECHA"));
     }
     public String getNumeroRegistro() {
         return numeroRegistro;

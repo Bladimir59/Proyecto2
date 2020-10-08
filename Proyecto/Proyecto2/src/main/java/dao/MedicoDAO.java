@@ -15,7 +15,7 @@ public class MedicoDAO extends Conectar{
     private static Connection cn;
     private static conexion.Conectar login;
     private static final String NUEVO_MEDICO= "INSERT INTO Medico (codigoMedico, nombre, numeroColegiado, DPI, telefono,"
-            + "correoElectronico,fechaInicioTrabajo,password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            + " correoElectronico, fechaInicioTrabajo, password) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     
     //private static final String NUEVO_ESPECIALIDAD
     //private static final String TABLA_UNION

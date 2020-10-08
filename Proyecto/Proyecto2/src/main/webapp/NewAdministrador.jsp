@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,24 +13,22 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form name="formulario1" action="/recursosEnServidor">
-        <fieldset>
-            <legend>
-                <h1>Administrador:</h1>
-            </legend>
-            Codigo: <br/>
-            <input type="text" size="30" name="nombre" />
-            <br/> DPI: 
-            <br/><input type="text" size="30" name="email" />
-            <br/> Nombre: 
-            <br/><input type="text" size="30" name="email" />
-            <br/> Contrase;a: 
-            <br/><input type="text" size="30" name="telefono" />
-            <br/>
-            <button type="submit">
-                enviar datos
-            </button>
-        </fieldset>
+        <form name="formulario1" action="AdministradorControl" method="post">
+            <fieldset>
+                <legend>
+                    <h1>Administrador:</h1>
+                </legend>
+                Codigo: <br/>
+                <input type="text" size="30" name="codigo" />
+                <br/> Nombre: 
+                <br/><input type="text" size="30" name="nombre" />
+                <br/> DPI: 
+                <br/><input type="text" size="30" name="DPI" />
+                <br/> Contrase;a: 
+                <br/><input type="password" size="30" name="password" />
+                <br/>
+                <button type="submit" name="accion" value="nuevoAdministrador">Aceptar</button>
+            </fieldset>
     </form>
     </body>
 </html>

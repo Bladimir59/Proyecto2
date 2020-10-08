@@ -20,11 +20,9 @@ public class Union {
         this.nombreEspecialidad = nombreEspecialidad;
     }
     //este es un constructor para los archivos de xml
-    public Administrador(Element dato) {
-        this.codigo = dato.getChildText("CODIGO");
-        this.DPI = dato.getChildText("DPI");
-        this.nombre = dato.getChildText("NOMBRE");
-        this.passwoed = dato.getChildText("PASSWORD");
+    public Union(Element dato) {
+        this.idMedico = dato.getChildText("CODIGO");
+        this.nombreEspecialidad = dato.getChildText("TITULO");
     }
     public String getIdMedico() {
         return idMedico;

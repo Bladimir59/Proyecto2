@@ -17,12 +17,17 @@ public class Especialidad {
         this.costo = costo;
     }
     //este es un constructor para los archivos de xml
-    public Administrador(Element dato) {
-        this.codigo = dato.getChildText("CODIGO");
-        this.DPI = dato.getChildText("DPI");
-        this.nombre = dato.getChildText("NOMBRE");
-        this.passwoed = dato.getChildText("PASSWORD");
+    public Especialidad(Element dato) {
+        this.nombre = dato.getChildText("TIPO");
+        this.descripcion = dato.getChildText(null);
+        this.costo = Double.parseDouble(dato.getChildText("COSTO"));
     }
+    //para la carga de archivo
+
+    public Especialidad(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public String getNombre() {
         return nombre;
     }
